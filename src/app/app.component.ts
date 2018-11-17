@@ -27,9 +27,12 @@ export class AppComponent implements OnInit {
   		})
   	}
     this.http.get('http://localhost:5820/myDBUY',httpOptions).subscribe(data => {alert(data);});
+
+
+    
     
 
   	
   }
 
-}
+}  
