@@ -8,8 +8,6 @@ import { HttpHeaders } from '@angular/common/http';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  title = 'resolucioneshttp';
-  results = '';
   baseUrl ='http://localhost:5820/resoluciones/';
   query = 'query?query=';
   
