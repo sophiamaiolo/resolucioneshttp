@@ -53,7 +53,7 @@ export class AppComponent implements OnInit {
 
   getBD(): void{
 
-  	/*GET BD*/
+  	/*GET FULL BD*/
 
   	const httpOptionsGet = {
 
