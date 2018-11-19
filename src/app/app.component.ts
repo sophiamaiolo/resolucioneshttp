@@ -68,7 +68,7 @@ export class AppComponent implements OnInit {
   	}
     this.http.get(this.baseUrl,httpOptionsGet).subscribe(data => {alert(data);});
 
-    /*SELECT*/
+    /*SELECT db*/
     
     const httpOptions = {
 
