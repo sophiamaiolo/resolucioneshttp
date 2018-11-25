@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpResponse, HttpErrorResponse, } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -26,13 +25,80 @@ export class ServiciosRepartidoService {
   nroRes='';
 
   /*INSERT REPARTIDO*/
-  insertRepartido(uriRepartido: string){
+  insertRepartido(uriRepartido: string) {
 
     var data="INSERT DATA {resoluciones1:"+uriRepartido+" a owl:NamedIndividual}";
-
     var query="query="+this.prefixResoluciones+this.prefixResoluciones1+data;
+    this.http.post(this.baseUrl+'update', query, this.httpOptionsInsert).subscribe(
+      // Successful responses call the first callback.
+      data => {console.log('ok'); },
+      // Errors will call this callback instead:
+      err => {console.log('Something went wrong!'+err);}
+    );
+  }
 
-    this.http.post(this.baseUrl+'update', query, this.httpOptionsInsert).subscribe();
+  insertInfoSesionRepartido(uriRepartido: string, infoSesion: string) {
+
+    var data="INSERT DATA {resoluciones1:"+uriRepartido+" resoluciones:infoSesion "+infoSesion+"}";
+    var query="query="+this.prefixResoluciones+this.prefixResoluciones1+data;
+    this.http.post(this.baseUrl+'update', query, this.httpOptionsInsert).subscribe(
+      // Successful responses call the first callback.
+      data => { console.log('ok'); },
+      // Errors will call this callback instead:
+      err => { console.log('Something went wrong!'+err); }
+    );  
+  }
+
+  /*TO DO*/
+  insertFechaRepartido(uriRepartido: string, fecha: string) {
+
+    var data="INSERT DATA {resoluciones1:"+uriRepartido+" resoluciones:infoSesion "+"}";
+    var query="query="+this.prefixResoluciones+this.prefixResoluciones1+data;
+    this.http.post(this.baseUrl+'update', query, this.httpOptionsInsert).subscribe(
+      // Successful responses call the first callback.
+      data => { console.log('ok'); },
+      // Errors will call this callback instead:
+      err => { console.log('Something went wrong!'+err); }
+    );  
+  }
+
+  /*TO DO*/
+  insertNumeroRepartido(uriRepartido: string, numero: string) {
+
+    var data="INSERT DATA {resoluciones1:"+uriRepartido+" resoluciones:infoSesion "+"}";
+    var query="query="+this.prefixResoluciones+this.prefixResoluciones1+data;
+    this.http.post(this.baseUrl+'update', query, this.httpOptionsInsert).subscribe(
+      // Successful responses call the first callback.
+      data => { console.log('ok'); },
+      // Errors will call this callback instead:
+      err => { console.log('Something went wrong!'+err); }
+    );  
+  }
+
+  /*TO DO*/
+  insertUrlPagRepartido(uriRepartido: string, url: string) {
+
+    var data="INSERT DATA {resoluciones1:"+uriRepartido+" resoluciones:infoSesion "+"}";
+    var query="query="+this.prefixResoluciones+this.prefixResoluciones1+data;
+    this.http.post(this.baseUrl+'update', query, this.httpOptionsInsert).subscribe(
+      // Successful responses call the first callback.
+      data => { console.log('ok'); },
+      // Errors will call this callback instead:
+      err => { console.log('Something went wrong!'+err); }
+    );  
+  }
+
+  /*TO DO*/
+  insertResolucionRepartido(uriRepartido: string, uriResolucion: string) {
+
+    var data="INSERT DATA {resoluciones1:"+uriRepartido+" resoluciones:infoSesion "+"}";
+    var query="query="+this.prefixResoluciones+this.prefixResoluciones1+data;
+    this.http.post(this.baseUrl+'update', query, this.httpOptionsInsert).subscribe(
+      // Successful responses call the first callback.
+      data => { console.log('ok'); },
+      // Errors will call this callback instead:
+      err => { console.log('Something went wrong!'+err); }
+    );  
   }
 
 

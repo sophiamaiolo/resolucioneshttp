@@ -11,10 +11,11 @@ export class AppComponent implements OnInit {
   // query = 'query?query=';
   
   uriRepartido='';
+  result=0;
 
   onKey(uriRepartido: string) {
     this.uriRepartido = uriRepartido;
-    this.serviciosRepartido.insertRepartido(this.uriRepartido);
+    this.serviciosRepartido.insertRepartido(this.uriRepartido);     
   }
 
   onClickMe(){
