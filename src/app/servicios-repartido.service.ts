@@ -101,6 +101,53 @@ export class ServiciosRepartidoService {
     );  
   }
 
+   insertAsistenteDecanoRepartido(uriRepartido: string, nombre: string) {
+
+    var data="INSERT DATA {resoluciones1:"+uriRepartido+" resoluciones:asistenteDecano resoluciones1:"+nombre+"}";
+    var query="query="+this.prefixResoluciones+this.prefixResoluciones1+data;
+    this.http.post(this.baseUrl+'update', query, this.httpOptionsInsert).subscribe(
+      // Successful responses call the first callback.
+      data => { console.log('ok'); },
+      // Errors will call this callback instead:
+      err => { console.log('Something went wrong!'+err); }
+    );  
+  }
+
+  insertAsistenteEgresadoRepartido(uriRepartido: string, nombre: string) {
+
+    var data="INSERT DATA {resoluciones1:"+uriRepartido+" resoluciones:asistenteEgresados resoluciones1:"+nombre+"}";
+    var query="query="+this.prefixResoluciones+this.prefixResoluciones1+data;
+    this.http.post(this.baseUrl+'update', query, this.httpOptionsInsert).subscribe(
+      // Successful responses call the first callback.
+      data => { console.log('ok'); },
+      // Errors will call this callback instead:
+      err => { console.log('Something went wrong!'+err); }
+    );  
+  }
+
+  insertAsistenteDocenteRepartido(uriRepartido: string, nombre: string) {
+
+    var data="INSERT DATA {resoluciones1:"+uriRepartido+" resoluciones:asistenteDocentes resoluciones1:"+nombre+"}";
+    var query="query="+this.prefixResoluciones+this.prefixResoluciones1+data;
+    this.http.post(this.baseUrl+'update', query, this.httpOptionsInsert).subscribe(
+      // Successful responses call the first callback.
+      data => { console.log('ok'); },
+      // Errors will call this callback instead:
+      err => { console.log('Something went wrong!'+err); }
+    );  
+  }
+
+  insertAsistenteEstudiantilRepartido(uriRepartido: string, nombre: string) {
+
+    var data="INSERT DATA {resoluciones1:"+uriRepartido+" resoluciones:asistenteEstudiantil resoluciones1:"+nombre+"}";
+    var query="query="+this.prefixResoluciones+this.prefixResoluciones1+data;
+    this.http.post(this.baseUrl+'update', query, this.httpOptionsInsert).subscribe(
+      // Successful responses call the first callback.
+      data => { console.log('ok'); },
+      // Errors will call this callback instead:
+      err => { console.log('Something went wrong!'+err); }
+    );  
+  }
 
   constructor(private http: HttpClient) { }
 }
