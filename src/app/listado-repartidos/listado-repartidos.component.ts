@@ -10,7 +10,7 @@ export class ListadoRepartidosComponent implements OnInit {
 
   repartidos: any[];
   repartido: any;
-  test:string:
+  selectedRepartido:any;
 
   constructor(private serviciosRepartido: ServiciosRepartidoService) { }
 
@@ -26,9 +26,9 @@ export class ListadoRepartidosComponent implements OnInit {
     );
   }
 
-  onClickRepartido(value:string){
-    this.test=value;
-    alert(this.test);
+  onClickRepartido(value:any){
+    this.selectedRepartido=value;
+    //alert(this.selectedRepartido.p.value);
   }
   
 

@@ -1,11 +1,30 @@
-<div class="list-group" #rep (click)="onClickRepartido(rep.class)">
-  <a href="#" *ngFor="let repartido of repartidos" class="list-group-item list-group-item-action flex-column align-items-start">
-    <div class="d-flex w-100 justify-content-between">
-      <h5 class="mb-1">{{repartido.p.value}}</h5>
-      <small>3 days ago</small>
+<div class="container-fluid"> 
+  <div class="row">
+    <div class="col">      
+      <div class="list-group">
+        <a href="#" *ngFor="let repartido of repartidos" class="list-group-item list-group-item-action flex-column align-items-start">
+          <div class="d-flex w-100 justify-content-between">
+            <h5 #rep (click)="onClickRepartido(repartido)" class="mb-1">{{repartido.p.value}}</h5>
+            <small>3 days ago</small>
+          </div>
+          <p class="mb-1">{{repartido.s.value}}</p>
+          <small>Resoluciones pendientes de edición.</small>
+          <span class="badge badge-primary badge-pill">14</span>
+        </a>
+      </div>
     </div>
-    <p class="mb-1">{{repartido.s.value}}</p>
-    <small>Resoluciones pendientes de edición.</small>
-    <span class="badge badge-primary badge-pill">14</span>
-  </a>
-  
+    <div class="col">
+      <div *ngIf="selectedRepartido" class="card" style="width: auto; height: 100%">
+        <div class="card-body">
+          <h5 class="card-title">{{selectedRepartido.p.value}}</h5>
+          <h6 class="card-subtitle mb-2 text-muted">{{selectedRepartido.s.value}}</h6>
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+          <a href="#" class="card-link">Card link</a>
+          <a href="#" class="card-link">Another link</a>
+        </div>
+      </div>
+    </div>    
+  </div>
+</div>
+
+
