@@ -1,29 +1,11 @@
-<div class="list-group">
-  <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+<div class="list-group" #rep (click)="onClickRepartido(rep.class)">
+  <a href="#" *ngFor="let repartido of repartidos" class="list-group-item list-group-item-action flex-column align-items-start">
     <div class="d-flex w-100 justify-content-between">
-      <h5 class="mb-1">Repartido 1/18</h5>
+      <h5 class="mb-1">{{repartido.p.value}}</h5>
       <small>3 days ago</small>
     </div>
-    <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
+    <p class="mb-1">{{repartido.s.value}}</p>
     <small>Resoluciones pendientes de edición.</small>
     <span class="badge badge-primary badge-pill">14</span>
   </a>
-  <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-    <div class="d-flex w-100 justify-content-between">
-      <h5 class="mb-1">Repartido 2/18</h5>
-      <small class="text-muted">3 days ago</small>
-    </div>
-    <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-    <small>Resoluciones pendientes de edición.</small>
-    <span class="badge badge-primary badge-pill">21</span>
-  </a>
-  <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-    <div class="d-flex w-100 justify-content-between">
-      <h5 class="mb-1">Repartido 3/18</h5>
-      <small class="text-muted">3 days ago</small>
-    </div>
-    <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-    <small>Resoluciones pendientes de edición.</small>
-    <span class="badge badge-primary badge-pill">44</span>
-  </a>
-</div>
+  

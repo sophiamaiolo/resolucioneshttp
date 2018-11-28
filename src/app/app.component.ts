@@ -11,15 +11,22 @@ export class AppComponent implements OnInit {
   // query = 'query?query=';
   
   uriRepartido='';
+  numRepartido='';
   result=0;
 
   onKey(uriRepartido: string) {
     this.uriRepartido = uriRepartido;
-    this.serviciosRepartido.insertRepartido(this.uriRepartido);     
+    console.log("OK");       
   }
 
+  onKey1(numRepartido: string) {
+    this.numRepartido = numRepartido; 
+    console.log("OK1");       
+  }
+
+
   onClickMe(){
-    //this.getBD();
+    this.serviciosRepartido.insertNumeroRepartido(this.uriRepartido,this.numRepartido)
   }
 
   constructor(private serviciosRepartido: ServiciosRepartidoService){}
