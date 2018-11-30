@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ServiciosRepartidoService } from '../servicios-repartido.service';
+import {Repartido} from './repartido';
+import { from } from 'rxjs';
+import { DetalleRepartidoComponent } from '../detalle-repartido/detalle-repartido.component';
+import {ServiciosResolucionService} from '../servicios-resolucion.service';
 
 @Component({
   selector: 'app-listado-repartidos',
@@ -9,10 +13,15 @@ import { ServiciosRepartidoService } from '../servicios-repartido.service';
 export class ListadoRepartidosComponent implements OnInit {
 
   repartidos: any[];
-  repartido: any;
+  repartido: Repartido;
   selectedRepartido:any;
+  selectedRepartidoURI:string;
+  fechaRep:string;
+  selectedRepartidoNum:string;
+  resoluciones: any;
 
-  constructor(private serviciosRepartido: ServiciosRepartidoService) { }
+
+  constructor(private serviciosResoluciones: ServiciosResolucionService, private serviciosRepartido: ServiciosRepartidoService,private detalle:DetalleRepartidoComponent) { }
 
   ngOnInit() {
       this.serviciosRepartido.getAllRepartidos().subscribe(
@@ -27,8 +36,36 @@ export class ListadoRepartidosComponent implements OnInit {
   }
 
   onClickRepartido(value:any){
-    this.selectedRepartido=value;
-    //alert(this.selectedRepartido.p.value);
+    this.selectedRepartido=value;    
+    this.selectedRepartidoURI=this.selectedRepartido.s.value;
+    this.selectedRepartidoNum=this.selectedRepartido.p.value;
+    this.repartido=new Repartido(this.selectedRepartidoURI,this.selectedRepartidoNum);
+   
+    var shortUri=this.selectedRepartidoURI.substring(68) //this.uriRepartido;
+    console.log('short'+shortUri);
+    this.serviciosRepartido.getFechaRepartido(shortUri).subscribe(
+      data => {
+        //console.log(data.results.bindings[0].p.value);
+        this.repartido.fecha=data.results.bindings[0].p.value;
+      },
+      err => {
+        console.log(err);
+      }
+    )    
+    this.repartido.shorturi=shortUri;
+
+    this.serviciosResoluciones.getAllResolucionesRepartido(this.repartido.shorturi).subscribe(
+      data => {
+        console.log(data.results.bindings[0].p.value);
+        this.resoluciones=data.results.bindings;
+      },
+      err => {
+        console.log(err);
+      }
+    );
+   
+    console.log('selectedRepartidoURI'+this.selectedRepartidoURI);
+    //this.detalle.test(this.selectedRepartidoURI);
   }
   
 

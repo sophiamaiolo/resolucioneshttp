@@ -1,11 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpResponse, HttpErrorResponse, } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { map } from "rxjs/operators";
 
 @Injectable({
   providedIn: 'root'
 })
 export class ServiciosResolucionService {
-  baseUrl ='http://localhost:5820/resoluciones/';
+  baseUrl ='http://localhost:5820/dbresoluciones/';
   query = 'query?query=';
   
   prefixResoluciones="PREFIX resoluciones:<http://www.semanticweb.org/gabriela/ontologies/2018/10/resoluciones#> ";
@@ -15,13 +17,27 @@ export class ServiciosResolucionService {
   httpOptionsInsert= {
 
     headers: new HttpHeaders({
-
+      "Accept":"application/sparql-results+json",
       "Content-Type": "application/x-www-form-urlencoded",
       "Authorization": "Basic YWRtaW46YWRtaW4=",
     })
   }
   
   nroRes='';
+
+  private extractData(res: Response) {
+    let body = res;
+    return body || {};
+  }
+
+  /*GET ALL REPARTIDOS*/
+  getAllResolucionesRepartido(shorturi:string):Observable<any> {
+    //var data="select * where {graph base:final {?s resoluciones:nroRepartido ?p}}";
+    var query="query=prefix base: <http://www.fing.edu.uy/test/> prefix res:<http://www.semanticweb.org/gabriela/ontologies/2018/10/resoluciones#> prefix res1:<http://www.semanticweb.org/gabriela/ontologies/2018/10/resoluciones/> select * where {graph base:final {res1:"+shorturi+" res:repartidoResolucion ?p}}"
+    return this.http.post(this.baseUrl+'query', query, this.httpOptionsInsert).pipe(
+      map(this.extractData)      
+    );       
+  }
 
   /*INSERT REPARTIDO*/
   insertResolucion(uriResolucion: string) {

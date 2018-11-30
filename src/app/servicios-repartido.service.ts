@@ -49,6 +49,32 @@ export class ServiciosRepartidoService {
     );*/
   }
   
+  /*GET ALL REPARTIDO*/
+  getDataRepartido(uriRepartido:string):Observable<any> {
+    //var data="select * where {graph base:final {?s resoluciones:nroRepartido ?p}}";
+    var query="query=prefix base: <http://www.fing.edu.uy/test/> prefix res:<http://www.semanticweb.org/gabriela/ontologies/2018/10/resoluciones/> select * where { graph base:final { res:"+uriRepartido + " ?r ?p}}"
+    return this.http.post(this.baseUrl+'query', query, this.httpOptionsInsert).pipe(
+      map(this.extractData)      
+    );   
+  }
+
+  /*GET ALL REPARTIDOS*/
+  getFechaRepartido(uriRepartido:string):Observable<any> {
+    //var data="select * where {graph base:final {?s resoluciones:nroRepartido ?p}}";
+    var query="query=prefix base: <http://www.fing.edu.uy/test/> prefix res:<http://www.semanticweb.org/gabriela/ontologies/2018/10/resoluciones/> prefix res1:<http://www.semanticweb.org/gabriela/ontologies/2018/10/resoluciones#> select * where { graph base:final { res:"+uriRepartido + " res1:fecha ?p}}"
+    return this.http.post(this.baseUrl+'query', query, this.httpOptionsInsert).pipe(
+      map(this.extractData)      
+    );   
+  }
+
+  /*GET ALL REPARTIDOS*/
+  getAsistenteDecanoRepartido(uriRepartido:string):Observable<any> {
+    //var data="select * where {graph base:final {?s resoluciones:nroRepartido ?p}}";
+    var query="query=prefix base: <http://www.fing.edu.uy/test/> prefix res:<http://www.semanticweb.org/gabriela/ontologies/2018/10/resoluciones/> prefix res1:<http://www.semanticweb.org/gabriela/ontologies/2018/10/resoluciones#> select * where { graph base:final { res:"+uriRepartido + " res1:fecha ?p}}"
+    return this.http.post(this.baseUrl+'query', query, this.httpOptionsInsert).pipe(
+      map(this.extractData)      
+    );   
+  }
 
   /*INSERT REPARTIDO*/
   insertRepartido(uriRepartido: string) {
