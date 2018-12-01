@@ -15,6 +15,10 @@ export class ListadoResolucionesComponent implements OnInit {
 
   constructor(private serviciosResoluciones: ServiciosResolucionService) { }
 
+  onClickResolucion(rep:any){
+    console.log('rep'+rep);
+  }
+
   ngOnInit() {
     
   }

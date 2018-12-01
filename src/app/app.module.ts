@@ -7,13 +7,15 @@ import { AppComponent } from './app.component';
 import { ListadoRepartidosComponent } from './listado-repartidos/listado-repartidos.component';
 import { DetalleRepartidoComponent } from './detalle-repartido/detalle-repartido.component';
 import { ListadoResolucionesComponent } from './listado-resoluciones/listado-resoluciones.component';
+import { DetalleResolucionComponent } from './detalle-resolucion/detalle-resolucion.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ListadoRepartidosComponent,
     DetalleRepartidoComponent,
-    ListadoResolucionesComponent
+    ListadoResolucionesComponent,
+    DetalleResolucionComponent
   ],
   imports: [
     BrowserModule,
