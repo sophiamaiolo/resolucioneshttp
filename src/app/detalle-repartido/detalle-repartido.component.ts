@@ -26,7 +26,7 @@ export class DetalleRepartidoComponent implements OnInit {
   ngOnInit() {
     console.log('uri');
     //this.repartido=new Repartido(this.uriRepartido);
-    var a="http://www.semanticweb.org/gabriela/ontologies/2018/10/resoluciones/Rep118F20180222"
+    var a="http://www.semanticweb.org/fing/ontologies/2018/resoluciones/Rep118F20180222"
     this.shortUri=this.uriRepartido.substring(68) //this.uriRepartido;
     console.log('short'+this.shortUri);
     this.serviciosRepartido.getFechaRepartido(this.shortUri).subscribe(

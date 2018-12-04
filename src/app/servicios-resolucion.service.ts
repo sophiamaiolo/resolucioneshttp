@@ -10,9 +10,13 @@ export class ServiciosResolucionService {
   baseUrl ='http://localhost:5820/dbresoluciones/';
   query = 'query?query=';
   
-  prefixResoluciones="PREFIX resoluciones:<http://www.semanticweb.org/gabriela/ontologies/2018/10/resoluciones#> ";
-  prefixResoluciones1="PREFIX resoluciones1:<http://www.semanticweb.org/gabriela/ontologies/2018/10/resoluciones/> ";
-  prefixOwl="PREFIX owl:<http://www.w3.org/2002/07/owl#> . ";
+  prefixResvocab="PREFIX resvocab:<http://www.semanticweb.org/fing/ontologies/2018/resoluciones#> ";
+  prefixRes="PREFIX res:<http://www.semanticweb.org/fing/ontologies/2018/resoluciones/> ";
+  prefixOwl="PREFIX owl:<http://www.w3.org/2002/07/owl#> ";
+  prefixBase = "PREFIX base:<http://www.fing.edu.uy/test/base/> ";
+  prefixVocab = "<http://www.fing.edu.uy/test/vocab#> ";
+
+  
 
   httpOptionsInsert= {
 
@@ -31,9 +35,10 @@ export class ServiciosResolucionService {
   }
 
   /*GET ALL REPARTIDOS*/
-  getAllResolucionesRepartido(shorturi:string):Observable<any> {
-    //var data="select * where {graph base:final {?s resoluciones:nroRepartido ?p}}";
-    var query="query=prefix base: <http://www.fing.edu.uy/test/> prefix res:<http://www.semanticweb.org/gabriela/ontologies/2018/10/resoluciones#> prefix res1:<http://www.semanticweb.org/gabriela/ontologies/2018/10/resoluciones/> select * where {graph base:final {res1:"+shorturi+" res:repartidoResolucion ?p}}"
+  getAllResolucionesRepartido(uriRepartido:string):Observable<any> {
+    var part1="SELECT ?n WHERE { {graph base:final {?q resvocab:repartidoResolucion ?n}} {SELECT * WHERE {BIND(IRI('"
+    var part2="') as ?q) }}}";
+    var query="query="+this.prefixBase+this.prefixRes+this.prefixResvocab+part1+uriRepartido+part2;   
     return this.http.post(this.baseUrl+'query', query, this.httpOptionsInsert).pipe(
       map(this.extractData)      
     );       
@@ -43,7 +48,7 @@ export class ServiciosResolucionService {
   insertResolucion(uriResolucion: string) {
 
     var data="INSERT DATA {resoluciones1:"+uriResolucion+" a owl:NamedIndividual}";
-    var query="query="+this.prefixResoluciones+this.prefixResoluciones1+this.prefixOwl+data;
+    var query="query="+this.prefixResvocab+this.prefixRes+this.prefixOwl+data;
     this.http.post(this.baseUrl+'update', query, this.httpOptionsInsert).subscribe(
       // Successful responses call the first callback.
       data => {console.log('ok'); },
@@ -56,7 +61,7 @@ export class ServiciosResolucionService {
   insertNumeroResolucion(uriResolucion: string,numeroResolucion:string) {
 
     var data="INSERT DATA {resoluciones1:"+uriResolucion+" resoluciones:nroResolucion resoluciones1:"+numeroResolucion+"}";
-    var query="query="+this.prefixResoluciones+this.prefixResoluciones1+data;
+    var query="query="+this.prefixResvocab+this.prefixRes+data;
     this.http.post(this.baseUrl+'update', query, this.httpOptionsInsert).subscribe(
       // Successful responses call the first callback.
       data => {console.log('ok'); },
@@ -69,7 +74,7 @@ export class ServiciosResolucionService {
   insertExpedienteResolucion(uriResolucion: string,uriExpediente:string) {
 
     var data="INSERT DATA {resoluciones1:"+uriResolucion+" resoluciones:resolucionExpediente resoluciones1:"+uriExpediente+"}";
-    var query="query="+this.prefixResoluciones+this.prefixResoluciones1+data;
+    var query="query="+this.prefixResvocab+this.prefixRes+data;
     this.http.post(this.baseUrl+'update', query, this.httpOptionsInsert).subscribe(
       // Successful responses call the first callback.
       data => {console.log('ok'); },
@@ -82,7 +87,7 @@ export class ServiciosResolucionService {
   insertSolicitanteResolucion(uriResolucion: string,uriSolicitante:string) {
 
     var data="INSERT DATA {resoluciones1:"+uriResolucion+" resoluciones:resolucionSolicitante resoluciones1:"+uriSolicitante+"}";
-    var query="query="+this.prefixResoluciones+this.prefixResoluciones1+data;
+    var query="query="+this.prefixResvocab+this.prefixRes+data;
     this.http.post(this.baseUrl+'update', query, this.httpOptionsInsert).subscribe(
       // Successful responses call the first callback.
       data => {console.log('ok'); },
@@ -95,7 +100,7 @@ export class ServiciosResolucionService {
   insertCantVotosResolucion(uriResolucion: string,cantVotos:number) {
 
     var data="INSERT DATA {resoluciones1:"+uriResolucion+" resoluciones:cantVotosResolucion "+cantVotos+"}";
-    var query="query="+this.prefixResoluciones+this.prefixResoluciones1+data;
+    var query="query="+this.prefixResvocab+this.prefixRes+data;
     this.http.post(this.baseUrl+'update', query, this.httpOptionsInsert).subscribe(
       // Successful responses call the first callback.
       data => {console.log('ok'); },
@@ -108,7 +113,7 @@ export class ServiciosResolucionService {
   insertFechaResolucion(uriResolucion: string,fecha:string) {
 
     var data="INSERT DATA {resoluciones1:"+uriResolucion+" resoluciones:fecha "+fecha+"^^xsd:dateTime}";
-    var query="query="+this.prefixResoluciones+this.prefixResoluciones1+data;
+    var query="query="+this.prefixResvocab+this.prefixRes+data;
     this.http.post(this.baseUrl+'update', query, this.httpOptionsInsert).subscribe(
       // Successful responses call the first callback.
       data => {console.log('ok'); },
@@ -121,7 +126,7 @@ export class ServiciosResolucionService {
   insertAccionResolucion(uriResolucion: string,uriAccion:string) {
 
     var data="INSERT DATA {resoluciones1:"+uriResolucion+" resoluciones:resolucionAcciones resoluciones1:"+uriAccion+"}";
-    var query="query="+this.prefixResoluciones+this.prefixResoluciones1+data;
+    var query="query="+this.prefixResvocab+this.prefixRes+data;
     this.http.post(this.baseUrl+'update', query, this.httpOptionsInsert).subscribe(
       // Successful responses call the first callback.
       data => {console.log('ok'); },
@@ -134,7 +139,7 @@ export class ServiciosResolucionService {
   insertDocumentoResolucion(uriResolucion: string,uriDocumento:string) {
 
     var data="INSERT DATA {resoluciones1:"+uriResolucion+" resoluciones:resolucionDocumentos resoluciones1:"+uriDocumento+"}";
-    var query="query="+this.prefixResoluciones+this.prefixResoluciones1+data;
+    var query="query="+this.prefixResvocab+this.prefixRes+data;
     this.http.post(this.baseUrl+'update', query, this.httpOptionsInsert).subscribe(
       // Successful responses call the first callback.
       data => {console.log('ok'); },

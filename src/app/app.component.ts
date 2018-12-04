@@ -49,8 +49,8 @@ export class AppComponent implements OnInit {
     
 //     //var insert = "query=PREFIX%20res%3A%3Chttp%3A%2F%2Fwww.semanticweb.org%2Fgabriela%2Fontologies%2F2018%2F10%2Fresoluciones%2F%3E%20PREFIX%20res2%3A%3Chttp%3A%2F%2Fwww.semanticweb.org%2Fgabriela%2Fontologies%2F2018%2F10%2Fresoluciones%23%3E%20INSERT%20DATA%20%7B%20res%3ARep118F20180223%20res2%3AnroRepartido%20%221%2F19%22%20%7D&undefined=";
 
-//     var prefix="PREFIX res:<http://www.semanticweb.org/gabriela/ontologies/2018/10/resoluciones/> ";
-//     prefix+="PREFIX res2:<http://www.semanticweb.org/gabriela/ontologies/2018/10/resoluciones#> ";
+//     var prefix="PREFIX res:<http://www.semanticweb.org/fing/ontologies/2018/resoluciones/> ";
+//     prefix+="PREFIX res2:<http://www.semanticweb.org/fing/ontologies/2018/resoluciones#> ";
 
 //     var data="INSERT DATA {res:Rep118F20180224 res2:nroRepartido "+'"'+this.nroRes+'"'+"}";
 
