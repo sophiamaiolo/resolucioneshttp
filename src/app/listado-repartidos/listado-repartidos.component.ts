@@ -41,20 +41,16 @@ export class ListadoRepartidosComponent implements OnInit {
     this.selectedRepartidoNum=this.selectedRepartido.p.value;
     this.repartido=new Repartido(this.selectedRepartidoURI,this.selectedRepartidoNum);
 
-    var shortUri=this.selectedRepartidoURI;//.substring(33) //this.uriRepartido;
-    console.log('short'+this.selectedRepartidoURI+'lala'+shortUri);
+    var shortUri=this.selectedRepartidoURI;
     this.serviciosRepartido.getFechaRepartido(shortUri).subscribe(
       data => {
-        //console.log(data.results.bindings[0].p.value);
         this.repartido.fecha=data.results.bindings[0].n.value;
       },
       err => {
         console.log(err);
       }
     )    
-    this.repartido.shorturi=shortUri;
-
-    
+    this.repartido.shorturi=shortUri;    
 
     this.serviciosResoluciones.getAllResolucionesRepartido(this.repartido.shorturi).subscribe(
       data => {

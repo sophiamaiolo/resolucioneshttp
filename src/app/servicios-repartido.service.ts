@@ -41,13 +41,7 @@ export class ServiciosRepartidoService {
     var query="query="+this.prefixBase+" "+this.prefixResvocab+" select * where {graph base:final {?s resvocab:nroRepartido ?p}}"
     return this.http.post(this.baseUrl+'query', query, this.httpOptionsInsert).pipe(
       map(this.extractData)      
-    );    
-    /*.subscribe(
-      // Successful responses call the first callback.
-      data => {console.log('ok'+data.json()); },
-      // Errors will call this callback instead:
-      err => {console.log('Something went wrong!'+err);}
-    );*/
+    );       
   }
   
   /*GET ALL REPARTIDO*/

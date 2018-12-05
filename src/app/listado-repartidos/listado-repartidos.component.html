@@ -2,22 +2,21 @@
   <div class="row">
     <div class="col">      
       <div class="list-group">
-        <a href="#" *ngFor="let repartido of repartidos" class="list-group-item list-group-item-action flex-column align-items-start">
+        <a href="#" *ngFor="let repartido of repartidos" (click)="onClickRepartido(repartido)" class="list-group-item list-group-item-action flex-column align-items-start">
           <div class="d-flex w-100 justify-content-between">
-            <h5 #rep (click)="onClickRepartido(repartido)" class="mb-1">{{repartido.p.value}}</h5>
+            <h5 #rep class="mb-1">{{repartido.p.value}}</h5>
             <small>3 days ago</small>
           </div>
           <p class="mb-1">{{repartido.s.value}}</p>
           <small>Resoluciones pendientes de edición.</small>
-          <span class="badge badge-primary badge-pill">14</span>
+          <span class="badge badge-primary badge-pill">10</span>
         </a>
       </div>
     </div>
     <div class="col">
       <div class="card" style="width: auto; height: 100%">
-        <app-detalle-repartido [repartido]="repartido"></app-detalle-repartido> -->
-        <app-listado-resoluciones [resoluciones]="resoluciones"></app-listado-resoluciones>
-    
+        <app-detalle-repartido [repartido]="repartido"></app-detalle-repartido> 
+        <app-listado-resoluciones [resoluciones]="resoluciones"></app-listado-resoluciones>    
       </div>    
   </div>
 </div>

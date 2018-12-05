@@ -44,6 +44,24 @@ export class ServiciosResolucionService {
     );       
   }
 
+   /*INSERT DOCUMENTO-REPARTIDO*/
+   insertDocumentoResolucion(uriResolucion:string, tema: string, tipo:string, autor: string, tipoorg:string):Observable<any> {
+
+    var part1='INSERT {GRAPH base:final {?q resvocab:resolucionDocumentos ?u. ?u resvocab:temaDocumento "'+tema+ '".';
+    var part2='?u resvocab:tipoDocumento "'+tipo+'".';
+    var part3=' ?u resvocab:tieneAutor ?a . '
+    var part4=' ?a resvocab:nombreAutor "'+autor+'". ';
+    var part5=' ?a resvocab:tipoOrganizacion "'+tipoorg+'". ';
+    var part6="}} WHERE { GRAPH base:final {BIND(IRI('"
+    var part7="') as ?q). BIND(UUID() as ?u) .";
+    var part8= "BIND(IRI(concat('http://www.semanticweb.org/fing/ontologies/2018/resoluciones/',encode_for_uri('"+autor+"'))) as ?a)}}";
+    var query="query="+this.prefixBase+this.prefixResvocab+part1+part2+part3+part4+part5+part6+uriResolucion+part7+part8;   
+    return this.http.post(this.baseUrl+'update', query, this.httpOptionsInsert).pipe(
+      map(this.extractData)      
+    );       
+  }
+
+
   /*INSERT REPARTIDO*/
   insertResolucion(uriResolucion: string) {
 
@@ -135,17 +153,5 @@ export class ServiciosResolucionService {
     );
   }
 
-  /*INSERT DOCUMENTO REPARTIDO*/
-  insertDocumentoResolucion(uriResolucion: string,uriDocumento:string) {
-
-    var data="INSERT DATA {resoluciones1:"+uriResolucion+" resoluciones:resolucionDocumentos resoluciones1:"+uriDocumento+"}";
-    var query="query="+this.prefixResvocab+this.prefixRes+data;
-    this.http.post(this.baseUrl+'update', query, this.httpOptionsInsert).subscribe(
-      // Successful responses call the first callback.
-      data => {console.log('ok'); },
-      // Errors will call this callback instead:
-      err => {console.log('Something went wrong!'+err);}
-    );
-  }
   constructor(private http: HttpClient) { }
 }
