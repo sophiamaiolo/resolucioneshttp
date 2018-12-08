@@ -16,7 +16,6 @@ export class ListadoResolucionesComponent implements OnInit {
   
   selectedResolucion: Resolucion;
   
-
   constructor(private serviciosResoluciones: ServiciosResolucionService) { }
 
   onClickResolucion(rep:any){

@@ -26,12 +26,13 @@ export class AppComponent implements OnInit {
 
 
   onClickMe(){
-    this.serviciosRepartido.insertNumeroRepartido(this.uriRepartido,this.numRepartido)
+    this.serviciosRepartido.insertNumeroRepartido(this.uriRepartido,this.numRepartido)    
   }
 
   constructor(private serviciosRepartido: ServiciosRepartidoService){}
 
   ngOnInit(): void{
+   
   }
 
 }

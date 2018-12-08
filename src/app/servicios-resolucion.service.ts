@@ -36,9 +36,10 @@ export class ServiciosResolucionService {
 
   /*GET ALL REPARTIDOS*/
   getAllResolucionesRepartido(uriRepartido:string):Observable<any> {
-    var part1="SELECT ?n WHERE { {graph base:final {?q resvocab:repartidoResolucion ?n}} {SELECT * WHERE {BIND(IRI('"
-    var part2="') as ?q) }}}";
-    var query="query="+this.prefixBase+this.prefixRes+this.prefixResvocab+part1+uriRepartido+part2;   
+    var part1="SELECT ?n ?a WHERE { {graph base:final {?n resvocab:nroResolucion ?a}}"
+    var part2="{SELECT ?n WHERE { {graph base:final {?q resvocab:repartidoResolucion ?n}} {SELECT * WHERE {BIND(IRI('"
+    var part3="') as ?q) }}}}}";
+    var query="query="+this.prefixBase+this.prefixRes+this.prefixResvocab+part1+part2+uriRepartido+part3;   
     return this.http.post(this.baseUrl+'query', query, this.httpOptionsInsert).pipe(
       map(this.extractData)      
     );       
@@ -60,7 +61,8 @@ export class ServiciosResolucionService {
       map(this.extractData)      
     );       
   }
-
+  //poner un check que diga que tipo es si persona u org. Si es org tiene que poner el tipo. En la consulta si es persona hago el insert 
+  //a persona y si es organizacion va el tipo.
 
   /*INSERT REPARTIDO*/
   insertResolucion(uriResolucion: string) {

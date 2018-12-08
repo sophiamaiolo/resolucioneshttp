@@ -1,42 +1,30 @@
- <ul class="list-group list-group-flush">
+ <!-- <ul class="list-group list-group-flush">
     <a href="#" *ngFor="let resolucion of resoluciones" class="list-group-item list-group-item-action flex-column align-items-start">
       <li class="list-group-item" #res (click)="onClickResolucion(resolucion)">{{resolucion.n.value}}</li>
     </a>
 </ul> 
-<app-detalle-resolucion [resolucion]="selectedResolucion"></app-detalle-resolucion>  
-<!-- 
-<div class="accordion" id="accordionExample">
-    <div class="card">
-      <div class="card-header" id="headingOne">
-        <h5 class="mb-0">
-          <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-            Ver Resoluciones
-          </button>
-        </h5>
-      </div>
-  
-      <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
-        <div class="card-body">
-            <ul class="list-group list-group-flush">
-                <a href="#" *ngFor="let resolucion of resoluciones" class="list-group-item list-group-item-action flex-column align-items-start">
-                  <li class="list-group-item" #res (click)="onClickResolucion(resolucion)">{{resolucion.n.value}}</li>
-                </a>
-            </ul> 
-        </div>
-      </div>
-    </div>
-    <div class="card">
-      <div class="card-header" id="headingTwo">
-        <h5 class="mb-0">
-          <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-            Edición de Resolución
-          </button>
-        </h5>
-      </div>
-      <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
-        <div class="card-body">
-            <app-detalle-resolucion [resolucion]="selectedResolucion"></app-detalle-resolucion> 
-         </div>
-      </div>
-    </div>    
-  </div> -->
+<app-detalle-resolucion [resolucion]="selectedResolucion"></app-detalle-resolucion>   -->
+<div class="col-xs-12" style="height:20px;"></div>
+<table *ngIf="resoluciones" class="table table-sm">
+  <thead>
+    <tr>
+      <th scope="col-sm-1">Número Resolucion</th>
+      <th scope="col-sm-1">Antecedentes</th>
+      <th scope="col-sm-1">Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let resolucion of resoluciones" >
+      <th scope="row"><a href="#" (click)="onClickResolucion(resolucion)">{{resolucion.a.value}}</a></th>
+      <td>8</td>
+      <td>10</td>
+    </tr>
+    <!-- <tr>
+      <th scope="row">2</th>
+      <td>Jacob</td>
+      <td>Thornton</td>
+      <td>@fat</td>
+    </tr> -->
+   </tbody>
+</table>
+<app-detalle-resolucion [resolucion]="selectedResolucion"></app-detalle-resolucion> 
