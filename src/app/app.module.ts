@@ -9,6 +9,8 @@ import { DetalleRepartidoComponent } from './detalle-repartido/detalle-repartido
 import { ListadoResolucionesComponent } from './listado-resoluciones/listado-resoluciones.component';
 import { DetalleResolucionComponent } from './detalle-resolucion/detalle-resolucion.component';
 import { YasqeEditorComponent } from './yasqe-editor/yasqe-editor.component';
+import { FormsModule } from '@angular/forms';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -22,7 +24,9 @@ import { YasqeEditorComponent } from './yasqe-editor/yasqe-editor.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule,
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]
