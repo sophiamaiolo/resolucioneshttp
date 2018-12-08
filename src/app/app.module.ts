@@ -8,6 +8,7 @@ import { ListadoRepartidosComponent } from './listado-repartidos/listado-reparti
 import { DetalleRepartidoComponent } from './detalle-repartido/detalle-repartido.component';
 import { ListadoResolucionesComponent } from './listado-resoluciones/listado-resoluciones.component';
 import { DetalleResolucionComponent } from './detalle-resolucion/detalle-resolucion.component';
+import { YasqeEditorComponent } from './yasqe-editor/yasqe-editor.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { DetalleResolucionComponent } from './detalle-resolucion/detalle-resoluc
     ListadoRepartidosComponent,
     DetalleRepartidoComponent,
     ListadoResolucionesComponent,
-    DetalleResolucionComponent
+    DetalleResolucionComponent,
+    YasqeEditorComponent
   ],
   imports: [
     BrowserModule,

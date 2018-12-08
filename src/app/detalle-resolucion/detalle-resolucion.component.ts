@@ -19,7 +19,6 @@ export class DetalleResolucionComponent implements OnInit {
   
   }
   onClickDocumento(tema:string,autor:string,tipo:string,autortipo:string){
-    console.log('onClickInsertarDocumento'+tema+ ' '+autor+ ' '+tipo)
     this.serviciosResoluciones.insertDocumentoResolucion(this.resolucion.uri,tema,tipo,autor,autortipo).subscribe(
       data => {        
       },
@@ -27,6 +26,16 @@ export class DetalleResolucionComponent implements OnInit {
         console.log(err);
       }
     )    
+  }
+
+  onClickAccion(descripcion:string,involucrado:string){
+    this.serviciosResoluciones.insertAccionResolucion(this.resolucion.uri,descripcion,involucrado).subscribe(
+      data => {        
+      },
+      err => {
+        console.log(err);
+      }
+    )  
   }
 
 }

@@ -15,9 +15,9 @@
   </thead>
   <tbody>
     <tr *ngFor="let resolucion of resoluciones" >
-      <th scope="row"><a href="#" (click)="onClickResolucion(resolucion)">{{resolucion.a.value}}</a></th>
-      <td>8</td>
-      <td>10</td>
+      <th scope="row"><a href="#" (click)="onClickResolucion(resolucion)">{{resolucion.num.value}}</a></th>
+      <td>{{resolucion.doc.value}}</td>
+      <td>{{resolucion.acc.value}}</td>
     </tr>
     <!-- <tr>
       <th scope="row">2</th>

@@ -1,8 +1,14 @@
 <div class="col-xs-12" style="height:20px;"></div>
 <div style="width: auto; height: 100%"> 
   <div  *ngIf="resolucion" class="">
-    <h5 class="card-subtitle">{{resolucion.uri}}</h5>
+    <!-- <div class="col-xs-12" style="height:20px;"></div> -->
+    <h5 class="card-subtitle">Datos de la Resolución:</h5>
+    <div class="col-xs-12" style="height:20px;"></div>
+    <h6 class="card-subtitle mb-2 text-muted">{{resolucion.uri}}</h6>
     <div class="col-xs-12" style="height:10px;"></div>
+    <div class="col-xs-12" style="height:20px;"></div>
+    <h5 class="card-subtitle">Texto de la Resolución:</h5>
+    <div class="col-xs-12" style="height:20px;"></div>
     <div class="alert alert-primary" role="alert">
         {{resolucion.texto}}
     </div>    
@@ -22,26 +28,35 @@
         <div class="form-group col-md-6">
           <label for="exampleInputPassword1">Autor Documento</label>
             <input type="text" class="form-control  form-control-sm" #inputDocumentoAutor placeholder="Ingrese el nombre de autor del documento">
-        </div>
+        </div>         
         <div class="form-group col-md-6">
-          <label for="exampleInputPassword1">Tipo Autor Documento</label>
+          <label for="exampleInputPassword1">Tipo Autor Documento (si es organización)</label>
           <input type="text" class="form-control  form-control-sm" #inputDocumentoAutorTipo placeholder="Ingrese el tipo de autor del documento">
+          <!-- <div class="input-group form-control-sm mb-3">
+            <select class="custom-select form-control-sm" #inputDocumentoAutorTipo>
+                <option class="form-control-sm"selected>Choose...</option>
+                <option value="1">Instituto</option>
+                <option value="2">Comisión</option>
+                <option value="3">Three</option>
+            </select>
+        </div> -->
         </div>
       </div>
       <button type="reset" (click)="onClickDocumento(inputDocumentoTema.value,inputDocumentoAutor.value,inputDocumentoTipo.value,inputDocumentoAutorTipo.value)" class="btn btn-primary">Ingresar Documento</button>
     </form>
+    <div class="col-xs-12" style="height:20px;"></div>
     <form>
       <div class="form-row">
         <div class="form-group col-md-6">
           <label for="exampleInputEmail1">Tema Acción</label>
-          <input type="text" class="form-control  form-control-sm" #inputDocumentoTema aria-describedby="emailHelp" placeholder="Ingrese el tema del documento">        
+          <input type="text" class="form-control  form-control-sm" #inputAccionDsc aria-describedby="emailHelp" placeholder="Ingrese el tema del documento">        
         </div>
         <div class="form-group col-md-6">
           <label for="exampleInputPassword1">Involucrado Acción</label>
-          <input type="text" class="form-control  form-control-sm" #inputDocumentoTipo placeholder="Ingrese el tipo del documento">
+          <input type="text" class="form-control  form-control-sm" #inputAccionInvolucrado placeholder="Ingrese el tipo del documento">
         </div>
       </div>      
-      <button type="reset" (click)="onClickDocumento(inputDocumentoTema.value,inputDocumentoAutor.value,inputDocumentoTipo.value,inputDocumentoAutorTipo.value)" class="btn btn-primary">Ingresar Documento</button>
+      <button type="reset" (click)="onClickAccion(inputAccionDsc.value,inputAccionInvolucrado.value)" class="btn btn-primary">Ingresar Acción</button>
     </form>
   </div> 
 </div>

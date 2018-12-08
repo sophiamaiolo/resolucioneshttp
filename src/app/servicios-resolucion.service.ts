@@ -35,11 +35,24 @@ export class ServiciosResolucionService {
   }
 
   /*GET ALL REPARTIDOS*/
-  getAllResolucionesRepartido(uriRepartido:string):Observable<any> {
-    var part1="SELECT ?n ?a WHERE { {graph base:final {?n resvocab:nroResolucion ?a}}"
-    var part2="{SELECT ?n WHERE { {graph base:final {?q resvocab:repartidoResolucion ?n}} {SELECT * WHERE {BIND(IRI('"
-    var part3="') as ?q) }}}}}";
-    var query="query="+this.prefixBase+this.prefixRes+this.prefixResvocab+part1+part2+uriRepartido+part3;   
+  // getAllResolucionesRepartido(uriRepartido:string):Observable<any> {
+  //   var part1="SELECT ?n ?a WHERE { {graph base:final {?n resvocab:nroResolucion ?a}}"
+  //   var part2="{SELECT ?n WHERE { {graph base:final {?q resvocab:repartidoResolucion ?n}} {SELECT * WHERE {BIND(IRI('"
+  //   var part3="') as ?q) }}}}}";
+  //   var query="query="+this.prefixBase+this.prefixRes+this.prefixResvocab+part1+part2+uriRepartido+part3;   
+  //   return this.http.post(this.baseUrl+'query', query, this.httpOptionsInsert).pipe(
+  //     map(this.extractData)      
+  //   );       
+  // }
+
+
+   getAllResolucionesRepartido(uriRepartido:string):Observable<any> {
+    var part1="SELECT ?num ?res ?acc ?doc where {{ SELECT ?num ?res ?acc (count(?d) as ?doc)"
+    var part2="WHERE {graph base:final {?rep resvocab:nroRepartido ?num. ?res a resvocab:Resolucion. ?rep resvocab:repartidoResolucion ?res."
+    var part3="{SELECT ?res (count(?a) as ?acc) WHERE {?res a resvocab:Resolucion. OPTIONAL{ ?res resvocab:resolucionAcciones ?a.}}";
+    var part4="group by ?res }} OPTIONAL{ ?res resvocab:resolucionDocumentos ?d.}} group by ?num ?res ?acc}";
+    var part5=" BIND(IRI('"+uriRepartido+"') as ?rep)}"
+    var query="query="+this.prefixBase+this.prefixRes+this.prefixResvocab+part1+part2+part3+part4+part5;   
     return this.http.post(this.baseUrl+'query', query, this.httpOptionsInsert).pipe(
       map(this.extractData)      
     );       
@@ -48,21 +61,61 @@ export class ServiciosResolucionService {
    /*INSERT DOCUMENTO-REPARTIDO*/
    insertDocumentoResolucion(uriResolucion:string, tema: string, tipo:string, autor: string, tipoorg:string):Observable<any> {
 
-    var part1='INSERT {GRAPH base:final {?q resvocab:resolucionDocumentos ?u. ?u resvocab:temaDocumento "'+tema+ '".';
-    var part2='?u resvocab:tipoDocumento "'+tipo+'".';
-    var part3=' ?u resvocab:tieneAutor ?a . '
-    var part4=' ?a resvocab:nombreAutor "'+autor+'". ';
-    var part5=' ?a resvocab:tipoOrganizacion "'+tipoorg+'". ';
-    var part6="}} WHERE { GRAPH base:final {BIND(IRI('"
-    var part7="') as ?q). BIND(UUID() as ?u) .";
-    var part8= "BIND(IRI(concat('http://www.semanticweb.org/fing/ontologies/2018/resoluciones/',encode_for_uri('"+autor+"'))) as ?a)}}";
-    var query="query="+this.prefixBase+this.prefixResvocab+part1+part2+part3+part4+part5+part6+uriResolucion+part7+part8;   
+    if (tipoorg != "" ) {
+      //es una org
+      var part1='INSERT {GRAPH base:final {?q resvocab:resolucionDocumentos ?u. ?u resvocab:temaDocumento "'+tema+ '".';
+      var part2='?u resvocab:tipoDocumento "'+tipo+'".';
+      var part3=' ?u resvocab:tieneAutor ?a . '
+      var part4=' ?u a resvocab:Organizacion . '
+      var part5=' ?a resvocab:nombreAutor "'+autor+'". ';
+      var part6=' ?a resvocab:tipoOrganizacion "'+tipoorg+'". ';
+      var part7="}} WHERE { GRAPH base:final {BIND(IRI('"
+      var part8="') as ?q). BIND(UUID() as ?u) .";
+      var part9= "BIND(IRI(concat('http://www.semanticweb.org/fing/ontologies/2018/resoluciones/',encode_for_uri('"+autor+"'))) as ?a)}}";
+      var query="query="+this.prefixBase+this.prefixResvocab+part1+part2+part3+part4+part5+part6+part7+uriResolucion+part8+part9;   
+    }
+    else {
+      //es una persona
+      var part1='INSERT {GRAPH base:final {?q resvocab:resolucionDocumentos ?u. ?u resvocab:temaDocumento "'+tema+ '".';
+      var part2='?u resvocab:tipoDocumento "'+tipo+'".';
+      var part3=' ?u resvocab:tieneAutor ?a . '
+      var part4=' ?u a resvocab:Persona . '
+      var part5=' ?a resvocab:nombreAutor "'+autor+'". ';     
+      var part7="}} WHERE { GRAPH base:final {BIND(IRI('"
+      var part8="') as ?q). BIND(UUID() as ?u) .";
+      var part9= "BIND(IRI(concat('http://www.semanticweb.org/fing/ontologies/2018/resoluciones/',encode_for_uri('"+autor+"'))) as ?a)}}";
+      var query="query="+this.prefixBase+this.prefixResvocab+part1+part2+part3+part4+part5+part7+uriResolucion+part8+part9; 
+
+    }  
+
     return this.http.post(this.baseUrl+'update', query, this.httpOptionsInsert).pipe(
       map(this.extractData)      
     );       
   }
+   
   //poner un check que diga que tipo es si persona u org. Si es org tiene que poner el tipo. En la consulta si es persona hago el insert 
   //a persona y si es organizacion va el tipo.
+
+  /*INSERT DOCUMENTO-REPARTIDO*/
+  insertAccionResolucion(uriResolucion:string, descripcion: string, involucrado:string):Observable<any> {
+
+      //es una org
+      var part1='INSERT {GRAPH base:final {?q resvocab:resolucionAccion ?acc. ?acc a resvocab:Accion . ';
+      var part2='?acc resvocab:descripcionAccion "'+descripcion+'".';
+      var part3=' ?acc resvocab:accionInvolucrados ?a .} '     
+      var part4="} WHERE { GRAPH base:final {BIND(IRI('"
+      var part5="') as ?q). BIND(UUID() as ?acc) .";
+      var part6= "BIND(IRI(concat('http://www.semanticweb.org/fing/ontologies/2018/resoluciones/',encode_for_uri('"+involucrado+"'))) as ?a)}}";
+      var query="query="+this.prefixBase+this.prefixResvocab+part1+part2+part3+part4+uriResolucion+part5+part6;   
+       
+
+    return this.http.post(this.baseUrl+'update', query, this.httpOptionsInsert).pipe(
+      map(this.extractData)      
+    );       
+  }
+
+
+
 
   /*INSERT REPARTIDO*/
   insertResolucion(uriResolucion: string) {
@@ -142,18 +195,6 @@ export class ServiciosResolucionService {
     );
   }
 
-  /*INSERT ACCION REPARTIDO*/
-  insertAccionResolucion(uriResolucion: string,uriAccion:string) {
-
-    var data="INSERT DATA {resoluciones1:"+uriResolucion+" resoluciones:resolucionAcciones resoluciones1:"+uriAccion+"}";
-    var query="query="+this.prefixResvocab+this.prefixRes+data;
-    this.http.post(this.baseUrl+'update', query, this.httpOptionsInsert).subscribe(
-      // Successful responses call the first callback.
-      data => {console.log('ok'); },
-      // Errors will call this callback instead:
-      err => {console.log('Something went wrong!'+err);}
-    );
-  }
-
+ 
   constructor(private http: HttpClient) { }
 }

@@ -20,8 +20,8 @@ export class ListadoResolucionesComponent implements OnInit {
 
   onClickResolucion(rep:any){
     
-    console.log('rep'+rep.n.value);   
-    this.selectedResolucion=new Resolucion(rep.n.value);
+    console.log('rep'+rep.res.value);   
+    this.selectedResolucion=new Resolucion(rep.res.value);
     this.selectedResolucion.texto="Visto la solicitud del CENUR Litoral Norte - sede Paysandú, y el informe de disponibilidad realizado por el Dpto. de Contaduría RN."
   }
 
