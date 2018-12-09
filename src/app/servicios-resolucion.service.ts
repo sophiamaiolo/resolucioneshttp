@@ -110,7 +110,7 @@ export class ServiciosResolucionService {
     /*obtener todas las personas u org*/
     getOrganizaciones():Observable<any> {
 
-      var data="select ?a ?b where { GRAPH base:final {?a resvocab:nombre ?b . ?a a resvocab:Persona }} ";  
+      var data="select ?a ?b where { GRAPH base:final {?a resvocab:nombre ?b . ?a a resvocab:Organizacion }} ";  
       var query="query="+this.prefixBase+this.prefixResvocab+data;   
          
       return this.http.post(this.baseUrl+'query', query, this.httpOptionsInsert).pipe(
@@ -118,6 +118,48 @@ export class ServiciosResolucionService {
       );   
     }
 
+     /*obtener todas las personas u org*/
+     getTipos():Observable<any> {
+
+      var data="select ?a ?b where { GRAPH base:final { ?a resvocab:tipoOrganizacion ?b }} ";  
+      var query="query="+this.prefixBase+this.prefixResvocab+data;   
+         
+      return this.http.post(this.baseUrl+'query', query, this.httpOptionsInsert).pipe(
+        map(this.extractData)      
+      );   
+    }
+
+  /*INSERT DOCUMENTO-REPARTIDO*/
+  insertOrganizacion(nombre:string, uriTipo : string, uriParte:string):Observable<any> {
+
+    //es una org
+    var part1='INSERT {GRAPH base:final {?org a resvocab:Organizacion . ';
+    var part2='?org resvocab:tipoOrganizacion ?tipo. ';
+    var part3='?org resvocab:esParteDe ?parte} '     
+    var part4="} WHERE { GRAPH base:final {BIND(IRI('"+uriParte+"') as ?parte)."
+    var part5=" BIND(IRI('"+uriTipo+"') as ?tipo)."
+    var part6= "BIND(IRI(concat('http://www.semanticweb.org/fing/ontologies/2018/resoluciones/',encode_for_uri('"+nombre+"'))) as ?org)}}";
+    var query="query="+this.prefixBase+this.prefixResvocab+part1+part2+part3+part4+part5+part6;   
+     
+
+  return this.http.post(this.baseUrl+'update', query, this.httpOptionsInsert).pipe(
+    map(this.extractData)      
+  );       
+}
+
+/*INSERT DOCUMENTO-REPARTIDO*/
+insertPersona(nombre:string):Observable<any> {
+
+  //es una org
+  var part1='INSERT {GRAPH base:final {?org a resvocab:Organizacion . ';
+  var part2='?per a resvocab:Person'+nombre+'.'; 
+  var part3="}} WHERE { GRAPH base:final {BIND(IRI(concat('http://www.semanticweb.org/fing/ontologies/2018/resoluciones/',encode_for_uri('"+nombre+"'))) as ?per)}}";
+   var query="query="+this.prefixBase+this.prefixResvocab+part1+part2+part3;    
+
+return this.http.post(this.baseUrl+'update', query, this.httpOptionsInsert).pipe(
+  map(this.extractData)      
+);       
+}
   /*INSERT REPARTIDO*/
   insertResolucion(uriResolucion: string) {
 
