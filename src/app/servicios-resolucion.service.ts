@@ -59,36 +59,18 @@ export class ServiciosResolucionService {
   }
 
    /*INSERT DOCUMENTO-REPARTIDO*/
-   insertDocumentoResolucion(uriResolucion:string, tema: string, tipo:string, autor: string, tipoorg:string):Observable<any> {
+   insertDocumentoResolucion(uriResolucion:string, tema: string, tipo:string, uriautor: string, tipoorg:string):Observable<any> {
 
-    if (tipoorg != "" ) {
       //es una org
       var part1='INSERT {GRAPH base:final {?q resvocab:resolucionDocumentos ?u. ?u resvocab:temaDocumento "'+tema+ '".';
       var part2='?u resvocab:tipoDocumento "'+tipo+'".';
-      var part3=' ?u resvocab:tieneAutor ?a . '
-      var part4=' ?a a resvocab:Organizacion . '
-      var part5=' ?a resvocab:nombre "'+autor+'". ';
-      var part6=' ?a resvocab:tipoOrganizacion "'+tipoorg+'". ';
-      var part7="}} WHERE { GRAPH base:final {BIND(IRI('"
-      var part8="') as ?q). BIND(UUID() as ?u) .";
-      var part9= "BIND(IRI(concat('http://www.semanticweb.org/fing/ontologies/2018/resoluciones/','Organizacion', encode_for_uri('"+autor+"'))) as ?a)}}";
-      var query="query="+this.prefixBase+this.prefixResvocab+part1+part2+part3+part4+part5+part6+part7+uriResolucion+part8+part9;   
-    }
-    else {
-      //es una personas
-      var part1='INSERT {GRAPH base:final {?q resvocab:resolucionDocumentos ?u. ?u resvocab:temaDocumento "'+tema+ '".';
-      var part2='?u resvocab:tipoDocumento "'+tipo+'".';
-      var part3=' ?u resvocab:tieneAutor ?a . '
-      var part4=' ?a a resvocab:Persona . '
-      var part5=' ?a resvocab:nombre "'+autor+'". ';     
-      var part7="}} WHERE { GRAPH base:final {BIND(IRI('"
-      var part8="') as ?q). BIND(UUID() as ?u) .";
-      var part9= "BIND(IRI(concat('http://www.semanticweb.org/fing/ontologies/2018/resoluciones/','Persona',encode_for_uri('"+autor+"'))) as ?a)}}";
-      var query="query="+this.prefixBase+this.prefixResvocab+part1+part2+part3+part4+part5+part7+uriResolucion+part8+part9; 
+      var part3=' ?u resvocab:tieneAutor ?a . '    
+      var part6="}} WHERE { GRAPH base:final {BIND(IRI('"
+      var part7="') as ?q). BIND(UUID() as ?u) .";
+      var part8= "BIND(IRI('"+uriautor+ "') as ?a)}}";
+      var query="query="+this.prefixBase+this.prefixResvocab+part1+part2+part3+part6+uriResolucion+part7+part8;      
 
-    }  
-
-    return this.http.post(this.baseUrl+'update', query, this.httpOptionsInsert).pipe(
+     return this.http.post(this.baseUrl+'update', query, this.httpOptionsInsert).pipe(
       map(this.extractData)      
     );       
   }
@@ -125,6 +107,16 @@ export class ServiciosResolucionService {
     );   
   }
 
+    /*obtener todas las personas u org*/
+    getOrganizaciones():Observable<any> {
+
+      var data="select ?a ?b where { GRAPH base:final {?a resvocab:nombre ?b . ?a a resvocab:Persona }} ";  
+      var query="query="+this.prefixBase+this.prefixResvocab+data;   
+         
+      return this.http.post(this.baseUrl+'query', query, this.httpOptionsInsert).pipe(
+        map(this.extractData)      
+      );   
+    }
 
   /*INSERT REPARTIDO*/
   insertResolucion(uriResolucion: string) {
