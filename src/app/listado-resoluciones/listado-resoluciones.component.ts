@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import {ServiciosResolucionService} from '../servicios-resolucion.service';
 import { Repartido} from '../listado-repartidos/repartido';
-import { Resolucion } from './Resolucion';
+import { Resolucion } from './resolucion';
 
 @Component({
   selector: 'app-listado-resoluciones',

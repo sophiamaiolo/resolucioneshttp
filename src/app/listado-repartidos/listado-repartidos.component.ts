@@ -26,7 +26,7 @@ export class ListadoRepartidosComponent implements OnInit {
   ngOnInit() {
       this.serviciosRepartido.getAllRepartidos().subscribe(
       data => {
-        console.log(data.results.bindings[0].p.value);
+        //console.log(data.results.bindings[0].p.value);
         this.repartidos=data.results.bindings;
       },
       err => {

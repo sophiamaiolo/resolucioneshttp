@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Resolucion } from '../listado-resoluciones/Resolucion';
+import { Resolucion } from '../listado-resoluciones/resolucion';
 import {ServiciosResolucionService} from '../servicios-resolucion.service';
 import {Observable} from 'rxjs';
 import {debounceTime, distinctUntilChanged, map, tap} from 'rxjs/operators';

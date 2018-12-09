@@ -25,11 +25,11 @@ export class DetalleRepartidoComponent implements OnInit {
 
   ngOnInit() {
   
-    this.shortUri=this.uriRepartido.substring(68) //this.uriRepartido;
+    this.shortUri= "http://fing.edu.uy"//this.uriRepartido.substring(68) //this.uriRepartido;
     console.log('short'+this.shortUri);
     this.serviciosRepartido.getFechaRepartido(this.shortUri).subscribe(
       data => {
-        console.log(data.results.bindings[0].p.value);
+        //console.log(data.results.bindings[0].p.value);
         this.repartido.fecha=data.results.bindings[0].p.value;
       },
       err => {
