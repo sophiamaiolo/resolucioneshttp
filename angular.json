@@ -24,11 +24,13 @@
             ],
             "styles": [
               "src/styles.css",
-              "node_modules/yasgui-yasqe/dist/yasqe.css"
+              "node_modules/yasgui-yasqe/dist/yasqe.css",
+              "node_modules/yasgui-yasr/dist/yasr.css"
             ],
             "scripts": [
               "node_modules/jquery/dist/jquery.min.js",
-              "node_modules/yasgui-yasqe/dist/yasqe.bundled.min.js"
+              "node_modules/yasgui-yasqe/dist/yasqe.bundled.min.js",
+              "node_modules/yasgui-yasr/dist/yasr.bundled.min.js"
             ]
           },
           "configurations": {
