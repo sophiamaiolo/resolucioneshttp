@@ -118,17 +118,17 @@ export class YasqeEditorComponent implements OnInit {
   //finally, initialize YASQE
   var yasr = YASR(document.getElementById("showcase"))
   var yasqe = YASQE(document.getElementById("yasqe"), {
+    value: `prefix base:  <http://www.fing.edu.uy/test/base/>
+    prefix vocab: <http://www.fing.edu.uy/test/vocab#>
+    prefix res: <http://www.fing.edu.uy/resoluciones/>
+    prefix resvocab: <http://www.semanticweb.org/fing/ontologies/2018/resoluciones#>
+    SELECT * WHERE {
+      graph base:final {?sub ?pred ?obj.}
+    } 
+    LIMIT 20`,
     sparql :{ 
       showQueryButton : true,
       endpoint : "http://localhost:5820/dbresoluciones/query",
-      value: `prefix base:  <http://www.fing.edu.uy/test/base/>
-      prefix vocab: <http://www.fing.edu.uy/test/vocab#>
-      prefix res: <http://www.fing.edu.uy/resoluciones/>
-      prefix resvocab: <http://www.semanticweb.org/fing/ontologies/2018/resoluciones#>
-      SELECT * WHERE {
-        graph base:final {?sub ?pred ?obj.}
-      } 
-      LIMIT 20`,
       headers: {
         "Accept":"application/sparql-results+json",
         "Content-Type": "application/x-www-form-urlencoded",
