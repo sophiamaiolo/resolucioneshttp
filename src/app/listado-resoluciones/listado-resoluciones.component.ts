@@ -15,6 +15,7 @@ export class ListadoResolucionesComponent implements OnInit {
   @Input() repartido : Repartido;
   
   selectedResolucion: Resolucion;
+  public isCollapsed = false;
   
   constructor(private serviciosResoluciones: ServiciosResolucionService) { }
 
