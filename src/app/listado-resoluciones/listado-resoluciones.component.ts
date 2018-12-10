@@ -22,7 +22,18 @@ export class ListadoResolucionesComponent implements OnInit {
     
     console.log('rep'+rep.res.value);   
     this.selectedResolucion=new Resolucion(rep.res.value);
-    this.selectedResolucion.texto="Visto la solicitud del CENUR Litoral Norte - sede Paysandú, y el informe de disponibilidad realizado por el Dpto. de Contaduría RN."
+
+    this.serviciosResoluciones.getTextoResoluciones(rep.res.value).subscribe(
+      data => {  
+        this.selectedResolucion.texto=data.results.bindings[0].t.value;              
+      },
+      err => {
+        console.log(err);
+      }
+    )
+
+
+    //this.selectedResolucion.texto="Visto la solicitud del CENUR Litoral Norte - sede Paysandú, y el informe de disponibilidad realizado por el Dpto. de Contaduría RN."
   }
 
   ngOnInit() {
