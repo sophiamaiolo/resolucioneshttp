@@ -67,22 +67,22 @@
     <form>
       <div class="form-row">
         <div class="form-group col-md-12">
-          <label for="exampleInputEmail1">Tema Documento</label>
-          <input type="text" class="form-control  form-control-sm" #inputDocumentoTema aria-describedby="emailHelp" placeholder="Ingrese el tema del documento">        
+          <label for="exampleInputEmail1">Tema Antecedente</label>
+          <input type="text" class="form-control  form-control-sm" #inputDocumentoTema aria-describedby="emailHelp" placeholder="Ingrese el tema del Antecedente">        
         </div>       
       </div>
       <div class="form-row">
          <div class="form-group col-md-6">
-              <label for="exampleInputPassword1">Tipo Documento</label>
-              <input type="text" class="form-control  form-control-sm" #inputDocumentoTipo placeholder="Ingrese el tipo del documento">
+              <label for="exampleInputPassword1">Tipo Antecedente</label>
+              <input type="text" class="form-control  form-control-sm" #inputDocumentoTipo placeholder="Ingrese el tipo del Antecedente">
         </div>
         <div class="form-group col-md-6">
-          <label for="app-detalle-resolucionc">Autor Documento</label>
-          <input id="typeahead-basic" type="text" class="form-control form-control-sm" #inputDocumentoAutor [(ngModel)]="model"  [ngModelOptions]="{standalone: true}" [resultFormatter]="formatter" [inputFormatter]="formatter" [ngbTypeahead]="search" placeholder="Ingrese el nombre de autor del documento"/>
+          <label for="app-detalle-resolucionc">Autor Antecedente</label>
+          <input id="typeahead-basic" type="text" class="form-control form-control-sm" #inputDocumentoAutor [(ngModel)]="model"  [ngModelOptions]="{standalone: true}" [resultFormatter]="formatter" [inputFormatter]="formatter" [ngbTypeahead]="search" placeholder="Ingrese el nombre de autor del Antecedente"/>
          <!-- <pre>Model: {{ model | json }}</pre>   -->
         </div>         
       </div>
-      <button type="reset" (click)="onClickDocumento(inputDocumentoTema.value,model.a.value,inputDocumentoTipo.value)" class="btn btn-primary btn-sm">Ingresar Documento</button>
+      <button type="reset" (click)="onClickDocumento(inputDocumentoTema.value,model.a.value,inputDocumentoTipo.value)" class="btn btn-primary btn-sm">Ingresar Antecedente</button>
     </form>
     <div class="col-xs-12" style="height:20px;"></div>
     <form>

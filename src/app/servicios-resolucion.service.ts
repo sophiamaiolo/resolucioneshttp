@@ -47,14 +47,14 @@ export class ServiciosResolucionService {
 
 
    getAllResolucionesRepartido(uriRepartido:string):Observable<any> {
-    var part1="SELECT ?num ?res ?acc ?doc where {{ SELECT  ?numrep ?num ?res ?acc (count(?d) as ?doc)";
-    var part2="WHERE {graph base:final {BIND(IRI('"+uriRepartido+"') as ?rep)";
-    var part3='?res resvocab:nroResolucion ?num. ?res a resvocab:Resolucion. ?rep resvocab:repartidoResolucion ?res.';
-    var part4="{SELECT ?res (count(?a) as ?acc) WHERE {";
-    var part5="?res a resvocab:Resolucion. OPTIONAL{ ?res resvocab:resolucionAcciones ?a.}}";
-    var part6="group by ?res }} OPTIONAL{ ?res resvocab:resolucionDocumentos ?d.}} group by ?num ?numrep ?res ?acc ?rep}";
-    var part7="}  order by ?num";
-    var query="query="+this.prefixBase+this.prefixRes+this.prefixResvocab+part1+part2+part3+part4+part5+part6+part7;   
+    var part1="SELECT ?rep ?res ?num ?acc (count(?d) as ?doc) WHERE {graph base:final { { SELECT ?rep ?res (count(?a) as ?acc) WHERE {  BIND(IRI('"+uriRepartido+"') as ?rep)";
+    var part2=" ?rep resvocab:repartidoResolucion ?res. ?res a resvocab:Resolucion. OPTIONAL { ?res resvocab:resolucionAccion ?a.} }  group by ?rep ?res  } ";
+    var part3=" ?res resvocab:nroResolucion ?num. OPTIONAL { ?res resvocab:resolucionDocumentos ?d.} } }  group by ?rep ?res ?num ?acc  order by ?num";
+    // var part4="{SELECT ?res (count(?a) as ?acc) WHERE {";
+    // var part5="?res a resvocab:Resolucion. OPTIONAL{ ?res resvocab:resolucionAcciones ?a.}}";
+    // var part6="group by ?res }} OPTIONAL{ ?res resvocab:resolucionDocumentos ?d.}} group by ?num ?numrep ?res ?acc ?rep}";
+    // var part7="}  order by ?num";
+    var query="query="+this.prefixBase+this.prefixRes+this.prefixResvocab+part1+part2+part3;   
     return this.http.post(this.baseUrl+'query', query, this.httpOptionsInsert).pipe(
       map(this.extractData)      
     );       
