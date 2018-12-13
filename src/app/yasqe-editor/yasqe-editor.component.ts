@@ -13,6 +13,7 @@ declare var $:any;
 
 
 export class YasqeEditorComponent implements OnInit {
+  model: { razonador: boolean; };
 
   //yasqe = YASQE(document.getElementById("yasqe"));
 
@@ -116,6 +117,8 @@ export class YasqeEditorComponent implements OnInit {
 
 
   //finally, initialize YASQE
+  this.model = {razonador: true}
+  var thus = this;
   var yasr = YASR(document.getElementById("showcase"))
   var yasqe = YASQE(document.getElementById("yasqe"), {
     value: `prefix base:  <http://www.fing.edu.uy/test/base/>
@@ -135,9 +138,11 @@ export class YasqeEditorComponent implements OnInit {
         "Authorization": "Basic YWRtaW46YWRtaW4=",
       },
       callbacks: {
-        beforeSend: function()
+        beforeSend: function(xhr, conf)
         {
-            console.log(arguments)
+          var data = conf.data;
+          conf.data = conf.data+ `&reasoning=${thus.model.razonador}`;
+            console.log(conf.data)
         }
       }
     }
